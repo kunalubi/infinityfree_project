@@ -1,0 +1,7 @@
+{
+  "routes": {
+    "/angular": {},
+    "/angular/about": {},
+    "/angular/login": {}
+  }
+}
