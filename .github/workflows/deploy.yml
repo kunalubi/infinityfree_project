@@ -1,0 +1,24 @@
+name: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main   # jab main branch me push hoga tab deploy hoga
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Upload files to InfinityFree via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./        # aapke repo ka root
+          server-dir: /htdocs/ # InfinityFree ka public folder
