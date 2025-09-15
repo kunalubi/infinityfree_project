@@ -1,4 +1,4 @@
-name: Deploy to InfinityFree
+name: Deploy PHP + Angular to InfinityFree
 
 on:
   push:
@@ -12,7 +12,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Upload files to InfinityFree via FTP
+      # Angular build setup
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Angular dependencies
+        working-directory: ./ng-crud
+        run: npm install
+
+      - name: Build Angular
+        working-directory: ./ng-crud
+        run: npm run build -- --configuration production --base-href /angular/
+
+      # Deploy PHP code (root)
+      - name: Deploy PHP via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -20,5 +35,22 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          local-dir: ./        # aapke repo ka root
-          server-dir: /htdocs/ # InfinityFree ka public folder
+          local-dir: ./        # pura repo ka root
+          server-dir: /htdocs/ # InfinityFree ka root
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules/*
+            ng-crud/*
+      
+      # Deploy Angular build (dist → /angular/)
+      - name: Deploy Angular build via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./ng-crud/dist/ng_crud/  # Angular build ka output
+          server-dir: /htdocs/angular/        # Angular yaha accessible hoga
