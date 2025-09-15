@@ -1,9 +1,9 @@
-name: Deploy PHP + Angular to InfinityFree
+name: Deploy to InfinityFree
 
 on:
   push:
     branches:
-      - main   # sirf main branch push par chalega
+      - main   # sirf main branch pe push hone par deploy hoga
 
 jobs:
   ftp-deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js (Angular 13 compatible)
+      # Step 2: Setup Node.js (Angular 13 stable with Node 16)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -24,12 +24,12 @@ jobs:
         working-directory: ./nginfinity
         run: npm install
 
-      # Step 4: Build Angular app for production
+      # Step 4: Build Angular app
       - name: Build Angular
         working-directory: ./nginfinity
         run: npm run build -- --configuration production --base-href /angular/
 
-      # Step 5: Deploy PHP code to root (htdocs/)
+      # Step 5: Deploy PHP files (htdocs root)
       - name: Deploy PHP via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
@@ -38,15 +38,15 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          local-dir: ./          # repo root
-          server-dir: /htdocs/   # InfinityFree root
+          local-dir: ./          # repo ka root
+          server-dir: /          # FTP root = htdocs
           exclude: |
             **/.git*
             **/.github*
             **/node_modules/*
-            nginfinity/*          # Angular project exclude
+            nginfinity/*          # Angular project ko ignore karna
 
-      # Step 6: Deploy Angular build output to /angular/
+      # Step 6: Deploy Angular build output to /angular
       - name: Deploy Angular build via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
@@ -55,5 +55,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          local-dir: ./nginfinity/dist/nginfinity/  # Angular build output
-          server-dir: /htdocs/angular/              # Public folder for Angular
+          local-dir: ./nginfinity/dist/nginfinity/  # Angular build ka output
+          server-dir: /angular/                     # htdocs/angular ke andar jayega
