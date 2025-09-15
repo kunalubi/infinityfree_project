@@ -11,3 +11,4 @@ function base_url($path = '') {
     return $base . ltrim($path, '/');
 }
 ?>
+//testing
