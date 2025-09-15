@@ -3,34 +3,16 @@ name: Deploy to InfinityFree
 on:
   push:
     branches:
-      - main   # sirf main branch pe push hone par deploy hoga
+      - main   # jab main branch me push hoga tab deploy hoga
 
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout repo
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js (Angular 13 stable with Node 16)
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      # Step 3: Install Angular dependencies
-      - name: Install Angular dependencies
-        working-directory: ./nginfinity
-        run: npm install
-
-      # Step 4: Build Angular app
-      - name: Build Angular
-        working-directory: ./nginfinity
-        run: npm run build -- --configuration production --base-href /angular/
-
-      # Step 5: Deploy PHP files (htdocs root)
-      - name: Deploy PHP via FTP
+      - name: Upload files to InfinityFree via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -38,22 +20,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          local-dir: ./          # repo ka root
-          server-dir: /          # FTP root = htdocs
-          exclude: |
-            **/.git*
-            **/.github*
-            **/node_modules/*
-            nginfinity/*          # Angular project ko ignore karna
-
-      # Step 6: Deploy Angular build output to /angular
-      - name: Deploy Angular build via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./nginfinity/dist/nginfinity/  # Angular build ka output
-          server-dir: /angular/                     # htdocs/angular ke andar jayega
+          local-dir: ./        # aapke repo ka root
+          server-dir: /htdocs/ # InfinityFree ka public folder
