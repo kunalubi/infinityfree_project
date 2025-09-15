@@ -3,30 +3,33 @@ name: Deploy PHP + Angular to InfinityFree
 on:
   push:
     branches:
-      - main
+      - main   # sirf main branch push par chalega
 
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout repo
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Angular build setup
+      # Step 2: Setup Node.js (Angular 13 compatible)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
 
+      # Step 3: Install Angular dependencies
       - name: Install Angular dependencies
         working-directory: ./nginfinity
         run: npm install
 
+      # Step 4: Build Angular app for production
       - name: Build Angular
         working-directory: ./nginfinity
         run: npm run build -- --configuration production --base-href /angular/
 
-      # Deploy PHP code (root)
+      # Step 5: Deploy PHP code to root (htdocs/)
       - name: Deploy PHP via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
@@ -35,15 +38,15 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          local-dir: ./        # pura repo root
-          server-dir: /htdocs/ # InfinityFree root
+          local-dir: ./          # repo root
+          server-dir: /htdocs/   # InfinityFree root
           exclude: |
             **/.git*
             **/.github*
             **/node_modules/*
-            nginfinity/*
+            nginfinity/*          # Angular project exclude
 
-      # Deploy Angular build (dist → /angular/)
+      # Step 6: Deploy Angular build output to /angular/
       - name: Deploy Angular build via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
@@ -52,5 +55,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          local-dir: ./nginfinity/dist/nginfinity/  # Angular build ka output
-          server-dir: /htdocs/angular/              # Angular yaha accessible hoga
+          local-dir: ./nginfinity/dist/nginfinity/  # Angular build output
+          server-dir: /htdocs/angular/              # Public folder for Angular
