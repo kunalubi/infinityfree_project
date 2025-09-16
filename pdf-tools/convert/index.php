@@ -1,4 +1,4 @@
-<?php include "../partials/header.php"; ?>
+<?php include '../../header.php'; ?>
     <div class="tool-intro">
         <h1>Convert PDF Files</h1>
         <p>Transform your PDFs into other formats or create PDFs from different file types.</p>
@@ -40,4 +40,4 @@
         </div>
     </div>
     <script src="/pdf-tools/convert/js/convert.js"></script>
-<?php include "../partials/footer.php"; ?>
+<?php include '../../footer.php'; ?>

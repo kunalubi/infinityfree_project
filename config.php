@@ -6,9 +6,8 @@ function base_url($path = '') {
     }
     // LOCALHOST
     else {
-        $base = 'http://localhost/htdocs/';
+        $base = 'http://localhost/infinityfree_project/';
     }
     return $base . ltrim($path, '/');
 }
 ?>
-//testing

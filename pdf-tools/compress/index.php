@@ -1,4 +1,4 @@
-<?php include "../partials/header.php"; ?>
+<?php include '../../header.php'; ?>
     <div class="tool-card compress-tool">
         <div class="tool-header">
             <h1><i class="fas fa-compress-alt"></i> PDF Compressor</h1>
@@ -336,7 +336,7 @@
     /* Compressor Tool Specific Styles */
     .compress-tool {
         max-width: 900px;
-        margin: 0 auto;
+        margin: 100px auto;
         padding: 2rem;
     }
     
@@ -676,4 +676,4 @@
         }
     }
     </style>
-<?php include "../partials/footer.php"; ?>
+<?php include '../../footer.php'; ?>

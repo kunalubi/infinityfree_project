@@ -162,11 +162,11 @@
                         'link' => 'pdf-tools/compress'
                     ],
                     [
-                        'name' => 'Text Converter',
+                        'name' => 'Images Tools',
                         'desc' => 'Transform text between uppercase, lowercase, camelCase and more formats.',
-                        'icon' => 'fas fa-text-height',
+                        'icon' => 'fas fa-image',
                         'category' => 'developer',
-                        'link' => '#'
+                        'link' => 'img-tools'
                     ],
                     [
                         'name' => 'Base64 Encoder',
