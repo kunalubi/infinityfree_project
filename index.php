@@ -175,27 +175,27 @@
                     'category' => 'developer',
                     'link' => 'img-tools'
                 ],
-                [
-                    'name' => 'Base64 Encoder',
-                    'desc' => 'Encode and decode Base64 strings quickly and easily.',
-                    'icon' => 'fas fa-lock',
-                    'category' => 'developer',
-                    'link' => '#'
-                ],
-                [
-                    'name' => 'Markdown Editor',
-                    'desc' => 'Live preview Markdown as you type with this handy editor.',
-                    'icon' => 'fas fa-markdown',
-                    'category' => 'productivity',
-                    'link' => '#'
-                ],
-                [
-                    'name' => 'Lorem Ipsum Generator',
-                    'desc' => 'Generate placeholder text for your designs and mockups.',
-                    'icon' => 'fas fa-paragraph',
-                    'category' => 'design',
-                    'link' => '#'
-                ]
+                // [
+                //     'name' => 'Base64 Encoder',
+                //     'desc' => 'Encode and decode Base64 strings quickly and easily.',
+                //     'icon' => 'fas fa-lock',
+                //     'category' => 'developer',
+                //     'link' => '#'
+                // ],
+                // [
+                //     'name' => 'Markdown Editor',
+                //     'desc' => 'Live preview Markdown as you type with this handy editor.',
+                //     'icon' => 'fas fa-markdown',
+                //     'category' => 'productivity',
+                //     'link' => '#'
+                // ],
+                // [
+                //     'name' => 'Lorem Ipsum Generator',
+                //     'desc' => 'Generate placeholder text for your designs and mockups.',
+                //     'icon' => 'fas fa-paragraph',
+                //     'category' => 'design',
+                //     'link' => '#'
+                // ]
             ];
 
             foreach ($tools as $tool) {
