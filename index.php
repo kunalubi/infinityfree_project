@@ -142,7 +142,7 @@
                 ],
                 [
                     'name' => 'All Pdf Tools',
-                    'desc' => 'Convert PDF files to various formats quickly and easily.',
+                    'desc' => 'Convert, merge, split, and more with our comprehensive PDF tools.',
                     'icon' => 'fas fa-file-pdf',
                     'category' => 'developer',
                     'link' => 'pdf-tools'
@@ -154,13 +154,13 @@
                     'category' => 'developer',
                     'link' => 'pdf-tools/convert'
                 ],
-                // [
-                //     'name' => 'JSON Formatter',
-                //     'desc' => 'Validate, format, and beautify your JSON data with our powerful tool.',
-                //     'icon' => 'fas fa-code',
-                //     'category' => 'developer',
-                //     'link' => '#'
-                // ],
+                [
+                    'name' => 'Qr Genrator',
+                    'desc' => 'Generate QR codes for your links and share them easily.',
+                    'icon' => 'fa-solid fa-qrcode',
+                    'category' => 'developer',
+                    'link' => 'qrgenrator'
+                ],
                 [
                     'name' => 'Compress pdf',
                     'desc' => 'Reduce the file size of your PDF documents without losing quality.',
@@ -170,10 +170,17 @@
                 ],
                 [
                     'name' => 'Images Tools',
-                    'desc' => 'Transform text between uppercase, lowercase, camelCase and more formats.',
+                    'desc' => 'Convert images to various formats quickly and easily.',
                     'icon' => 'fas fa-image',
                     'category' => 'developer',
                     'link' => 'img-tools'
+                ],
+                [
+                    'name' => 'Background Remover',
+                    'desc' => 'Remove background from images quickly and easily.',
+                    'icon' => 'fa-solid fa-images',
+                    'category' => 'developer',
+                    'link' => 'bg-remover'
                 ],
                 // [
                 //     'name' => 'Base64 Encoder',
